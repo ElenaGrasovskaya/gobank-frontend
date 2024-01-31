@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	export let api_data: any[] = [];
-
+	export let api_data: any[] = [{ id: 1, name: 'iPhone', value: 1000, date: new Date().toDateString(), description: "Just for fun" },
+	{ id: 2, name: 'Apples', value: 50, date: new Date().toDateString(), description: "Just to eat" }];
+	/* 
 	onMount(async () => {
 		const response = await fetch('https://gobank-api.onrender.com/account');
 		api_data = await response.json();
 		console.log(api_data);
-	});
+	}); */
 </script>
 
-<h1 class="text-3xl font-bold underline">INVOICE</h1>
+<h1 class="text-3xl font-bold">Invoices</h1>
 
 <body class="antialiased font-sans">
 	<div class="container mx-auto">
@@ -87,63 +88,62 @@
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
 								>
-									User
+									Id
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
 								>
-									Rol
+									Name
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
 								>
-									Created at
+									Value
 								</th>
 								<th
 									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
 								>
-									Status
+									Date
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+								>
+									Description
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							{#each api_data as user}
+							{#each api_data as item}
 								<tr>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 										<div class="flex items-center">
-											<div class="flex-shrink-0 w-10 h-10">
-												<img
-													class="w-full h-full rounded-full"
-													src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-													alt=""
-												/>
-											</div>
+							
 											<div class="ml-3">
 												<p class="text-gray-900 whitespace-no-wrap">
-													{`${user.first_name} ${user.last_name}`}
+													{item.id}
 												</p>
 											</div>
 										</div>
 									</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-										<p class="text-gray-900 whitespace-no-wrap">{user.balance}</p>
+										<p class="text-gray-900 whitespace-no-wrap">{item.name}</p>
 									</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 										<p class="text-gray-900 whitespace-no-wrap">
-											{user.created_at}
+											{item.value}
 										</p>
 									</td>
 									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-										<span
-											class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-										>
-											<span
-												aria-hidden
-												class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-											></span>
-											<span class="relative">Activo</span>
-										</span>
+										<p class="text-gray-900 whitespace-no-wrap">
+											{item.date}
+										</p>
 									</td>
+									<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+										<p class="text-gray-900 whitespace-no-wrap">
+											{item.description}
+										</p>
+									</td>
+									
 								</tr>
 							{/each}
 						</tbody>
