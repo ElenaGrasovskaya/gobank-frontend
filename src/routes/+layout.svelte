@@ -1,8 +1,9 @@
 <script>
   import "../app.css";
+  import { page } from '$app/stores';
 </script>
 
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-indigo-100">
   <header
     class="w-full text-gray-700 bg-white border-t border-gray-100 shadow-sm body-font"
   >
@@ -10,34 +11,36 @@
       class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row"
     >
       <nav class="flex flex-wrap items-center text-base lg:w-2/5 md:ml-auto">
-        <a href="/" class="mr-5 font-medium hover:text-gray-900">Home</a>
-        <a href="/clients" class="mr-5 font-medium hover:text-gray-900">Clients</a>
-        <a href="/invoices" class="font-medium hover:text-gray-900">Invoices</a>
+        <a href="/" class="px-4 py-2 text-xs font-bold  text-gray-900 uppercase mr-5 hover:bg-blue-300 transition-all rounded" class:active={$page.url.pathname === '/'}>Home</a>
+        <a href="/clients" class="px-4 py-2 text-xs font-bold  text-gray-900 uppercase mr-5 hover:bg-blue-300 transition-all rounded" class:active={$page.url.pathname === '/clients'}>Clients</a>
+        <a href="/invoices" class="px-4 py-2 text-xs font-bold  text-gray-900 uppercase mr-5 hover:bg-blue-300 transition-all rounded" class:active={$page.url.pathname === '/invoices'}>Invoices</a>
       </nav>
       <a
         class="flex items-center sansSerif order-first mb-4 font-medium text-gray-900 text-lg lg:order-none lg:w-1/5 title-font lg:items-center lg:justify-center md:mb-0"
+        href ="/"
       > GoBank
         
       </a>
       <div
         class="inline-flex items-center h-full ml-5 lg:w-2/5 lg:justify-end lg:ml-0"
       >
-        <a href="#_" class="mr-5 font-medium hover:text-gray-900">Login</a>
+        <a href="/login" class="mr-5 px-4 py-2 text-xs font-bold text-gray-900 uppercase  hover:bg-blue-300 transition-all rounded" class:active={$page.url.pathname === '/login'}>Login</a>
         <a
           href="/signup"
-          class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
+          class="px-4 py-2 text-xs font-bold  text-gray-900 uppercase transition-all duration-150 focus:outline-none hover:bg-blue-300 rounded"
+          class:active={$page.url.pathname === '/signup'}
         >
           Sign Up
         </a>
       </div>
     </div>
   </header>
-  <main><div class="container px-6 py-8 mx-auto"><slot></slot></div></main>
+  <main class = "bg-indigo-100"><div class="container px-6 py-8 mx-auto"><slot></slot></div></main>
 
-  <footer class="bg-white dark:bg-gray-900 mt-auto">
+  <footer class="bg-indigo-100 dark:bg-gray-900 mt-auto">
     <div class="container px-6 py-8 mx-auto">
       <div class="flex flex-col items-center text-center">
-        <a href="#" class="text-gray-100 sansSerif">
+        <a href="/" class="text-gray-100 sansSerif">
           GoBank
         </a>
 
@@ -109,3 +112,17 @@
     </div>
   </footer>
 </body>
+
+
+<style lang="postcss">
+a.active {
+  @apply px-4 py-2 text-xs font-bold text-white uppercase bg-teal-400 rounded shadow outline-none hover:shadow-md focus:outline-none;
+
+}
+
+a.active:hover {
+  --tw-bg-opacity: 1;
+    background-color: rgb(147 197 253 / var(--tw-bg-opacity));
+}
+</style>
+
