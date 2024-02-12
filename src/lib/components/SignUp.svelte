@@ -8,7 +8,9 @@
 		minLength,
 		email
 	} from 'svelte-use-form';
-	import { passwordMatch, containNumbers } from './customValidators';
+	import { passwordMatch, containNumbers } from '../service/customValidators';
+	import {register} from '$lib/service/register';
+	import { goto } from '$app/navigation';
 	const form = useForm();
 
 	const requiredMessage = 'This field is required';
@@ -27,22 +29,9 @@
 
 	async function registerUser() {
 		try {
-			console.log('Starting register with ', userData);
-			const response = await fetch('https://gobank-api.onrender.com/register', {
-				method: 'POST', // Specify the method
-				headers: {
-					'Content-Type': 'application/json' // Specify the content type
-				},
-				body: JSON.stringify(userData) // Convert the JavaScript object to a JSON string
-			});
-
-			if (!response.ok) {
-				// If the server response is not ok, throw an error
-				throw new Error(`Error: ${response.statusText}`);
-			}
-
-			const result = await response.json(); // Assuming the server responds with JSON
-			console.log(result); // Handle the response data as needed
+			const result = await register(userData);
+			console.log(result);
+			goto('/login');
 		} catch (error) {
 			console.error('Error registering user:', error);
 		}

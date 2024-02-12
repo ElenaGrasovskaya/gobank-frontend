@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { useForm, Hint, HintGroup, validators, required, email } from 'svelte-use-form';
 	import { goto } from '$app/navigation';
-	import { writable } from 'svelte/store';
-
-	export const account_email = writable('');
+	import {login} from '$lib/service/login';
+	
 
 	const form = useForm();
 
@@ -13,26 +12,12 @@
 		email: '',
 		password: ''
 	};
+	
 	async function loginUser() {
 		try {
-			console.log('Starting login');
-			const response = await fetch('https://gobank-api.onrender.com/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(userData),
-				credentials: 'include'
-			});
-
-			if (!response.ok) {
-				throw new Error(`Error: ${response.statusText}`);
-			}
-
-			const result = await response.json();
+			const result = await login(userData);
 			console.log(result);
 			goto('/expenses');
-			$account_email = userData.email;
 		} catch (error) {
 			console.error('Error logging user:', error);
 		}

@@ -1,7 +1,5 @@
 <script>
     import SignUp from "$lib/components/SignUp.svelte";
-    export let hasAnAccount = false;
-    export let loggedIn = false;
 </script>
 
 <SignUp />
